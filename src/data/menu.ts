@@ -53,10 +53,11 @@ export const menu = [
   {
     title: "Practice Playground",
     children: [
-      { name: "Counter", path: "/playground/counter" },
-      { name: "Todo App", path: "/playground/todo" },
-      { name: "CRUD", path: "/playground/crud" },
-      { name: "Shopping Cart", path: "/playground/cart" },
+        { name: "Try Out", path: "/playground" }
+    //   { name: "Counter", path: "/playground/counter" },
+    //   { name: "Todo App", path: "/playground/todo" },
+    //   { name: "CRUD", path: "/playground/crud" },
+    //   { name: "Shopping Cart", path: "/playground/cart" },
     ],
   },
 
