@@ -9,8 +9,8 @@ export const menu = [
       { name: "State", path: "/topic/state" },
       { name: "Event Handling", path: "/topic/event-handling" },
       { name: "Conditional Rendering", path: "/topic/conditional-rendering" },
-      { name: "Lists & Keys", path: "/topic/lists-keys" }
-    ]
+      { name: "Lists & Keys", path: "/topic/lists-keys" },
+    ],
   },
 
   {
@@ -23,8 +23,8 @@ export const menu = [
       { name: "useCallback", path: "/topic/usecallback" },
       { name: "useRef", path: "/topic/useref" },
       { name: "useReducer", path: "/topic/usereducer" },
-      { name: "Custom Hooks", path: "/topic/custom-hooks" }
-    ]
+      { name: "Custom Hooks", path: "/topic/custom-hooks" },
+    ],
   },
 
   {
@@ -35,8 +35,8 @@ export const menu = [
       { name: "Params", path: "/topic/params" },
       { name: "Navigate", path: "/topic/navigate" },
       { name: "Nested Routes", path: "/topic/nested-routes" },
-      { name: "Protected Routes", path: "/topic/protected-routes" }
-    ]
+      { name: "Protected Routes", path: "/topic/protected-routes" },
+    ],
   },
 
   {
@@ -46,8 +46,8 @@ export const menu = [
       { name: "Redux Toolkit", path: "/topic/redux-toolkit" },
       { name: "Redux Thunk", path: "/topic/redux-thunk" },
       { name: "Redux Saga", path: "/topic/redux-saga" },
-      { name: "Zustand", path: "/topic/zustand" }
-    ]
+      { name: "Zustand", path: "/topic/zustand" },
+    ],
   },
 
   {
@@ -56,7 +56,17 @@ export const menu = [
       { name: "Counter", path: "/playground/counter" },
       { name: "Todo App", path: "/playground/todo" },
       { name: "CRUD", path: "/playground/crud" },
-      { name: "Shopping Cart", path: "/playground/cart" }
-    ]
-  }
+      { name: "Shopping Cart", path: "/playground/cart" },
+    ],
+  },
+
+  {
+    title: "Interview Q&A Collection",
+    children: [
+      {
+        name: "React Interview Questions & Answers",
+        path: "/interview-qa",
+      },
+    ],
+  },
 ];
