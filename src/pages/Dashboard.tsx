@@ -21,13 +21,25 @@ export default function Dashboard() {
   return (
     <div>
 
-      <h1 className="text-4xl font-bold mb-8">
+      <h1
+        className="
+        text-2xl
+        md:text-4xl
+        font-bold
+        mb-6"
+      >
         React Interview Preparation
       </h1>
 
-      <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
-
-        {cards.map((card) => (
+      <div
+        className="
+        grid
+        grid-cols-1
+        sm:grid-cols-2
+        xl:grid-cols-4
+        gap-5"
+      >
+        {cards.map(card => (
           <div
             key={card.title}
             className="
@@ -40,12 +52,17 @@ export default function Dashboard() {
               {card.title}
             </p>
 
-            <h2 className="text-3xl font-bold mt-2">
+            <h2
+              className="
+              text-2xl
+              md:text-3xl
+              font-bold
+              mt-2"
+            >
               {card.value}
             </h2>
           </div>
         ))}
-
       </div>
 
     </div>

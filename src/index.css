@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
-* {
-  margin: 0;
-  padding: 0;
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -11,13 +11,25 @@ body,
 #root {
   width: 100%;
   height: 100%;
+  margin: 0;
 }
 
 body {
-  background-color: #f8fafc;
-  color: #0f172a;
+  overflow: hidden;
   font-family:
     Inter,
     system-ui,
     sans-serif;
+  background: #f8fafc;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-break: break-word;
 }

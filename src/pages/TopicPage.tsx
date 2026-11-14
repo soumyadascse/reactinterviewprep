@@ -3,7 +3,6 @@ import { questions } from "../data/questions";
 import QuestionCard from "../components/common/QuestionCard";
 
 export default function TopicPage() {
-
   const { topic } = useParams();
 
   const filtered = questions.filter(
@@ -12,7 +11,6 @@ export default function TopicPage() {
 
   return (
     <div>
-
       <h2 className="text-3xl font-bold mb-5">
         {topic}
       </h2>
@@ -20,10 +18,11 @@ export default function TopicPage() {
       {filtered.map((q) => (
         <QuestionCard
           key={q.id}
-          data={q}
+          question={q.question}
+          answer={q.answer}
+          example={q.example}
         />
       ))}
-
     </div>
   );
 }

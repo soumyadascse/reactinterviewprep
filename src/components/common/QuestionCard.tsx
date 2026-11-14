@@ -1,25 +1,56 @@
-import type { Question } from "../../types/Question";
-
 type Props = {
-  data: Question;
+  question: string;
+  answer: string;
+  example: string;
 };
 
-export default function QuestionCard({ data }: Props) {
+export default function QuestionCard({
+  question,
+  answer,
+  example
+}: Props) {
   return (
-    <div className="border rounded p-4 mb-4 shadow">
-
-      <h3 className="font-bold text-lg">
-        {data.question}
+    <div
+      className="
+      bg-white
+      p-4
+      md:p-6
+      rounded-xl
+      shadow
+      mb-5"
+    >
+      <h3
+        className="
+        text-lg
+        md:text-xl
+        font-bold
+        mb-3"
+      >
+        {question}
       </h3>
 
-      <p className="mt-2">
-        {data.answer}
+      <p
+        className="
+        text-gray-700
+        text-sm
+        md:text-base"
+      >
+        {answer}
       </p>
 
-      <pre className="bg-gray-100 p-3 mt-3 rounded">
-        {data.example}
+      <pre
+        className="
+        mt-4
+        bg-slate-900
+        text-green-400
+        p-3
+        rounded
+        overflow-x-auto
+        text-xs
+        md:text-sm"
+      >
+        {example}
       </pre>
-
     </div>
   );
 }
