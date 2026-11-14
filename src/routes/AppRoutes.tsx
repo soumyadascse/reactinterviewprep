@@ -8,6 +8,7 @@ import MainLayout from "../components/layout/MainLayout";
 import Home from "../pages/Home";
 import TopicPage from "../pages/TopicPage";
 import Playground from "../pages/Playground";
+import ReactInterviewQA from "../pages/ReactInterviewQA";
 
 export default function AppRoutes() {
   return (
@@ -33,7 +34,11 @@ export default function AppRoutes() {
           element={<Playground />}
         />
 
-      </Route>
+        <Route
+            path="interview-qa"
+            element={<ReactInterviewQA />}
+            />
+        </Route>
 
     </Routes>
   );
