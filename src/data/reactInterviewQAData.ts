@@ -1644,5 +1644,2177 @@ const { data } =
     realWorldScenario: `
 A customer management portal automatically keeps data synchronized across multiple pages while minimizing API calls.
 `
+  },
+  {
+    question: "What are Container and Presentational Components?",
+
+    answer: `
+This pattern separates business logic from UI rendering.
+
+Container Components:
+• Handle API calls
+• Manage state
+• Process business logic
+
+Presentational Components:
+• Receive props
+• Display UI
+• Have minimal logic
+
+This separation improves reusability, maintainability, and testability.
+
+Although Hooks reduced the need for strict Container/Presentational separation, the concept is still widely used in enterprise applications.
+`,
+
+    codeSnippet: `
+function UsersContainer() {
+  const [users, setUsers] =
+    useState([]);
+
+  return (
+    <UsersView
+      users={users}
+    />
+  );
+}
+`,
+
+    realWorldScenario: `
+A Customer Dashboard fetches data in a Container component, while the UI rendering is delegated to reusable Presentational components.
+`
+  },
+
+  {
+    question: "What are Smart and Dumb Components?",
+
+    answer: `
+Smart Components manage state and business logic.
+
+Dumb Components focus only on UI rendering.
+
+Smart Components:
+• API calls
+• State updates
+• Data transformations
+
+Dumb Components:
+• Reusable UI
+• Receive props
+• Emit events
+
+This pattern helps create highly reusable components and reduces duplication.
+`,
+
+    codeSnippet: `
+function UserCard({
+  user
+}) {
+  return (
+    <div>
+      {user.name}
+    </div>
+  );
+}
+`,
+
+    realWorldScenario: `
+A Profile Container loads profile data while reusable components such as UserCard remain unaware of API implementations.
+`
+  },
+
+  {
+    question: "What is Component Composition?",
+
+    answer: `
+Component Composition is the practice of building complex components from smaller reusable components.
+
+React strongly encourages composition over inheritance.
+
+Benefits:
+
+• Better reusability
+• Easier maintenance
+• Cleaner architecture
+• Reduced duplication
+
+Modern React applications heavily rely on composition patterns.
+`,
+
+    codeSnippet: `
+<Card>
+  <UserInfo />
+</Card>
+`,
+
+    realWorldScenario: `
+Dashboard layouts are often built from reusable cards, tables, charts, filters, and actions composed together.
+`
+  },
+
+  {
+    question: "What is Render Props Pattern?",
+
+    answer: `
+Render Props is a pattern where a component shares functionality using a function prop.
+
+Instead of rendering fixed UI, the component calls a function supplied by its consumer.
+
+Before Hooks became popular, Render Props were commonly used for sharing reusable logic.
+
+Today many Render Prop use cases are implemented using Custom Hooks.
+`,
+
+    codeSnippet: `
+<DataProvider
+  render={(data) => (
+    <UserList
+      users={data}
+    />
+  )}
+/>
+`,
+
+    realWorldScenario: `
+Reusable data-fetching components can expose fetched data using Render Props.
+`
+  },
+
+  {
+    question: "What are Compound Components?",
+
+    answer: `
+Compound Components work together as a group while sharing internal state.
+
+Examples include:
+
+• Tabs
+• Accordion
+• Select
+• Dropdown
+
+Consumers use the grouped components while the implementation handles state internally.
+
+This creates a flexible API and improves reusability.
+`,
+
+    codeSnippet: `
+<Tabs>
+  <Tabs.List />
+  <Tabs.Panel />
+</Tabs>
+`,
+
+    realWorldScenario: `
+UI libraries like Radix UI and Headless UI use Compound Components extensively.
+`
+  },
+
+  {
+    question: "What are Error Boundaries?",
+
+    answer: `
+Error Boundaries catch runtime rendering errors in React component trees.
+
+Without Error Boundaries, the entire React tree may crash.
+
+Error Boundaries provide fallback UI and prevent application failure.
+
+They only catch rendering errors and lifecycle errors. They do not catch asynchronous errors or event-handler errors.
+`,
+
+    codeSnippet: `
+<ErrorBoundary>
+  <Dashboard />
+</ErrorBoundary>
+`,
+
+    realWorldScenario: `
+An analytics widget crashes but the remainder of the dashboard continues functioning.
+`
+  },
+
+  {
+    question: "What are React Portals?",
+
+    answer: `
+Portals allow rendering a component outside of its parent DOM hierarchy.
+
+They are commonly used for:
+
+• Modals
+• Tooltips
+• Dialogs
+• Notifications
+
+Portals solve z-index and overflow issues while preserving React component relationships.
+`,
+
+    codeSnippet: `
+createPortal(
+  <Modal />,
+  document.body
+);
+`,
+
+    realWorldScenario: `
+An application-wide modal should appear above all parent containers regardless of layout structure.
+`
+  },
+
+  {
+    question: "What is Reconciliation?",
+
+    answer: `
+Reconciliation is the process React uses to compare the previous Virtual DOM with the new Virtual DOM.
+
+React calculates the minimum set of changes required and updates only affected DOM nodes.
+
+This process improves performance by avoiding unnecessary DOM updates.
+
+Keys play an important role during reconciliation for identifying changed list items.
+`,
+
+    codeSnippet: `
+users.map(user => (
+  <UserCard
+    key={user.id}
+  />
+));
+`,
+
+    realWorldScenario: `
+A customer grid updates only modified rows instead of re-rendering thousands of records.
+`
+  },
+
+  {
+    question: "What is React Fiber?",
+
+    answer: `
+React Fiber is the internal rendering engine introduced to improve scheduling and rendering capabilities.
+
+Fiber enables:
+
+• Incremental rendering
+• Concurrent features
+• Better responsiveness
+• Work prioritization
+
+Fiber allows React to pause and resume work instead of blocking the UI.
+`,
+
+    codeSnippet: `
+React Fiber is internal
+and not directly used
+through application code.
+`,
+
+    realWorldScenario: `
+Large dashboards remain responsive during expensive UI updates because React Fiber prioritizes user interactions.
+`
+  },
+
+  {
+    question: "What is Hydration?",
+
+    answer: `
+Hydration occurs when React attaches event handlers to HTML generated on the server.
+
+SSR first sends HTML to the browser.
+
+React then hydrates the page by connecting components to server-rendered markup.
+
+Without hydration, server-rendered pages cannot become interactive.
+`,
+
+    codeSnippet: `
+hydrateRoot(
+  document.getElementById(
+    "root"
+  ),
+  <App />
+);
+`,
+
+    realWorldScenario: `
+Next.js applications rely heavily on hydration to make server-rendered content interactive.
+`
+  },
+
+  {
+    question: "Controlled State vs Global State",
+
+    answer: `
+Controlled State belongs to a component or its local hierarchy.
+
+Global State is shared across multiple modules.
+
+Examples of Local State:
+
+• Modal visibility
+• Input values
+• Dropdown selections
+
+Examples of Global State:
+
+• Authentication
+• Theme
+• User profile
+• Notifications
+
+Choosing the correct scope is important for maintainability.
+`,
+
+    codeSnippet: `
+const [open, setOpen] =
+  useState(false);
+`,
+
+    realWorldScenario: `
+Authentication state is global while modal visibility remains local to a page.
+`
+  },
+
+  {
+    question: "What is a good React folder structure?",
+
+    answer: `
+A scalable React folder structure should separate concerns and support growth.
+
+Common organization:
+
+• components
+• pages
+• hooks
+• services
+• utils
+• types
+• store
+
+The ideal structure depends on team size and project complexity.
+
+Feature-based organization is popular in enterprise applications.
+`,
+
+    codeSnippet: `
+src/
+  components/
+  pages/
+  hooks/
+  services/
+  store/
+`,
+
+    realWorldScenario: `
+Large enterprise applications with dozens of modules use feature-based folder structures to improve maintainability.
+`
+  },
+
+  {
+    question: "How do SOLID principles apply to React?",
+
+    answer: `
+SOLID principles improve code quality and maintainability.
+
+Examples in React:
+
+• Single Responsibility
+  - One component, one responsibility
+
+• Open/Closed
+  - Extend behavior using composition
+
+• Interface Segregation
+  - Small focused props
+
+• Dependency Inversion
+  - Inject services and APIs
+
+Applying SOLID principles reduces technical debt and improves scalability.
+`,
+
+    codeSnippet: `
+<UserCard
+  user={user}
+/>
+`,
+
+    realWorldScenario: `
+A large application with hundreds of reusable components remains maintainable because responsibilities are properly separated.
+`
+  },
+
+  {
+    question: "What are Micro Frontends?",
+
+    answer: `
+Micro Frontends extend the microservices idea to frontend development.
+
+Instead of one large frontend application, multiple teams independently develop and deploy smaller frontend modules.
+
+Benefits:
+
+• Independent deployment
+• Team autonomy
+• Improved scalability
+
+Challenges:
+
+• Shared dependencies
+• Routing
+• Communication between modules
+`,
+    codeSnippet: `
+Shell App
+  ├── Orders
+  ├── Accounts
+  └── Reports
+`,
+
+    realWorldScenario: `
+Large organizations often allow separate teams to own Billing, Reporting, and Customer modules independently.
+`
+  },
+
+  {
+    question: "What is Module Federation?",
+
+    answer: `
+Module Federation is a Webpack feature that allows applications to load modules from other applications at runtime.
+
+It is one of the most popular implementations of Micro Frontends.
+
+Benefits:
+
+• Independent deployments
+• Shared code
+• Flexible architecture
+
+Module Federation enables teams to deliver features independently while maintaining a unified application experience.
+`,
+    codeSnippet: `
+remotes: {
+  reports:
+    "reports@url"
+}
+`,
+
+    realWorldScenario: `
+A banking application loads Reporting, Payments, and Investments as separate deployable frontend modules.
+`
+  },
+  {
+    question: "Interface vs Type in TypeScript?",
+
+    answer: `
+Both interface and type are used to define custom types in TypeScript.
+
+Interface:
+• Best for object definitions
+• Supports declaration merging
+• Preferred for API contracts and component props
+
+Type:
+• Supports unions
+• Supports intersections
+• More flexible for advanced typing
+
+In most React applications, interfaces are commonly used for props and API models, while types are often used for unions and utility typing.
+
+In interviews, mention that both are very similar for basic object definitions.
+`,
+
+    codeSnippet: `
+interface User {
+  id: number;
+  name: string;
+}
+
+type Status =
+  "ACTIVE" |
+  "INACTIVE";
+`,
+
+    realWorldScenario: `
+Large enterprise applications use interfaces for API contracts and types for status values, permissions, and unions.
+`
+  },
+
+  {
+    question: "What are Generics in TypeScript?",
+
+    answer: `
+Generics allow components, functions, and classes to work with multiple data types while maintaining type safety.
+
+Instead of creating separate implementations for different types, generics create reusable code.
+
+Generics are heavily used in React Query, Axios responses, reusable tables, hooks, and utility functions.
+`,
+
+    codeSnippet: `
+function identity<T>(
+  value: T
+): T {
+  return value;
+}
+`,
+
+    realWorldScenario: `
+Reusable DataTable components often use generics to display any type of API response without losing type safety.
+`
+  },
+
+  {
+    question: "What are Utility Types in TypeScript?",
+
+    answer: `
+Utility Types help transform existing types.
+
+Common Utility Types:
+
+• Partial<T>
+• Required<T>
+• Pick<T>
+• Omit<T>
+• Readonly<T>
+• Record<K,V>
+
+These improve maintainability and reduce duplicate type definitions.
+
+Most enterprise TypeScript applications use utility types extensively.
+`,
+
+    codeSnippet: `
+interface User {
+  id: number;
+  name: string;
+}
+
+type UserUpdate =
+  Partial<User>;
+`,
+
+    realWorldScenario: `
+Update profile APIs usually require only a subset of fields, making Partial<T> extremely useful.
+`
+  },
+
+  {
+    question: "Should we use React.FC or normal functions?",
+
+    answer: `
+Modern React projects generally prefer normal functions instead of React.FC.
+
+Benefits of normal functions:
+
+• Simpler typing
+• Better readability
+• Explicit children handling
+• Fewer TypeScript surprises
+
+While React.FC still works, many teams avoid it as a coding standard.
+`,
+
+    codeSnippet: `
+interface Props {
+  name: string;
+}
+
+function UserCard(
+  props: Props
+) {
+  return (
+    <div>
+      {props.name}
+    </div>
+  );
+}
+`,
+
+    realWorldScenario: `
+Most modern enterprise React codebases written in TypeScript use standard functions instead of React.FC.
+`
+  },
+
+  {
+    question: "How do you create Type-safe APIs in React?",
+
+    answer: `
+Type-safe APIs ensure frontend and backend contracts remain synchronized.
+
+Benefits:
+
+• Compile-time validation
+• Auto-completion
+• Fewer runtime errors
+• Better refactoring support
+
+Usually achieved using TypeScript interfaces together with Axios or Fetch wrappers.
+`,
+
+    codeSnippet: `
+interface User {
+  id: number;
+  name: string;
+}
+
+const users =
+  await axios.get<
+    User[]
+  >("/users");
+`,
+
+    realWorldScenario: `
+Frontend and Spring Boot teams share API contracts, reducing integration defects dramatically.
+`
+  },
+
+  {
+    question: "What is Jest?",
+
+    answer: `
+Jest is a JavaScript testing framework developed by Meta.
+
+Features:
+
+• Fast execution
+• Mocking support
+• Snapshot testing
+• Code coverage reporting
+
+Jest is commonly used together with React Testing Library for React projects.
+`,
+
+    codeSnippet: `
+test(
+  "adds numbers",
+  () => {
+    expect(
+      1 + 1
+    ).toBe(2);
+  }
+);
+`,
+
+    realWorldScenario: `
+Automated testing pipelines often execute hundreds of Jest tests before deployment.
+`
+  },
+
+  {
+    question: "What is React Testing Library?",
+
+    answer: `
+React Testing Library focuses on testing user behavior rather than implementation details.
+
+Instead of testing component internals, it encourages testing how users interact with the application.
+
+This results in reliable and maintainable tests.
+`,
+
+    codeSnippet: `
+render(
+  <Login />
+);
+
+screen.getByText(
+  "Login"
+);
+`,
+
+    realWorldScenario: `
+Testing login pages, registration forms, and dashboards using actual user workflows.
+`
+  },
+
+  {
+    question: "How do you mock APIs in tests?",
+
+    answer: `
+API mocking isolates tests from real backend systems.
+
+Benefits:
+
+• Faster execution
+• Stable tests
+• No dependency on external APIs
+
+Common approaches:
+
+• Jest Mock
+• Mock Service Worker (MSW)
+• Axios Mocks
+`,
+    codeSnippet: `
+jest.mock(
+  "./api"
+);
+`,
+
+    realWorldScenario: `
+Testing frontend components while backend services are unavailable.
+`
+  },
+
+  {
+    question: "What is Unit Testing?",
+
+    answer: `
+Unit Testing verifies individual functions or components in isolation.
+
+The goal is ensuring a small piece of code behaves correctly.
+
+Unit tests are fast, focused, and easy to maintain.
+
+Examples:
+
+• Utility functions
+• Hooks
+• Small components
+`,
+    codeSnippet: `
+expect(
+  add(2,3)
+).toBe(5);
+`,
+
+    realWorldScenario: `
+Testing validation logic before integrating it into larger forms.
+`
+  },
+
+  {
+    question: "What is Integration Testing?",
+
+    answer: `
+Integration Testing verifies that multiple components work correctly together.
+
+It tests interactions between modules rather than a single isolated function.
+
+Examples:
+
+• Form submission
+• API integration
+• Authentication flow
+`,
+    codeSnippet: `
+render(
+  <LoginForm />
+);
+
+fireEvent.click(
+  loginButton
+);
+`,
+
+    realWorldScenario: `
+Testing the interaction between Login Form, API Service, and Redux Store.
+`
+  },
+
+  {
+    question: "What is End-to-End (E2E) Testing?",
+
+    answer: `
+End-to-End Testing validates complete user workflows in a running application.
+
+Examples:
+
+• Login
+• Checkout
+• Registration
+• Payments
+
+These tests provide the highest confidence but are slower than unit tests.
+`,
+    codeSnippet: `
+cy.visit("/login");
+
+cy.get("#submit")
+  .click();
+`,
+
+    realWorldScenario: `
+Verifying complete customer purchase journeys before production releases.
+`
+  },
+
+  {
+    question: "What is Cypress?",
+
+    answer: `
+Cypress is a modern End-to-End testing framework.
+
+Features:
+
+• Real browser testing
+• Excellent debugging
+• Fast setup
+• Screenshots
+• Video recording
+
+Cypress is widely adopted in React projects.
+`,
+
+    codeSnippet: `
+cy.visit("/");
+
+cy.contains(
+  "Login"
+);
+`,
+
+    realWorldScenario: `
+Ensuring business-critical workflows function correctly after every deployment.
+`
+  },
+
+  {
+    question: "What is Vitest?",
+
+    answer: `
+Vitest is a fast modern testing framework built for Vite applications.
+
+Benefits:
+
+• Faster execution
+• Better Vite integration
+• Similar API to Jest
+
+Many modern React + Vite applications now prefer Vitest.
+`,
+    codeSnippet: `
+import {
+  describe,
+  it,
+  expect
+} from "vitest";
+`,
+
+    realWorldScenario: `
+Used in Vite-based enterprise applications to reduce testing execution time.
+`
+  },
+
+  {
+    question: "How do you test Custom Hooks?",
+
+    answer: `
+Custom Hooks should be tested independently of UI whenever possible.
+
+Testing verifies:
+
+• Initial state
+• State updates
+• Async behavior
+• Side effects
+
+This ensures reusable Hook logic remains stable.
+`,
+    codeSnippet: `
+const {
+  result
+} = renderHook(
+  () => useCounter()
+);
+`,
+
+    realWorldScenario: `
+Testing reusable hooks such as useAuth, useDebounce, useApi, and usePagination.
+`
+  },
+
+  {
+    question: "How do you test Context API?",
+
+    answer: `
+Context testing verifies components correctly consume provided context values.
+
+Typically, components are rendered inside a Provider during tests.
+
+Tests should validate rendering behavior and state changes.
+`,
+    codeSnippet: `
+render(
+  <ThemeProvider>
+    <Header />
+  </ThemeProvider>
+);
+`,
+
+    realWorldScenario: `
+Testing language switching, authentication state, and themes provided through Context API.
+`
+  },
+  {
+    question:
+      "How would you optimize a page rendering 10,000 rows?",
+
+    answer: `
+Rendering thousands of DOM elements can significantly impact performance.
+
+I would use a combination of:
+
+• List Virtualization (react-window)
+• Pagination
+• Lazy Loading
+• React.memo
+• useMemo
+• Proper keys
+
+The most effective solution is usually virtualization because only the visible rows are rendered, dramatically reducing DOM nodes and rendering cost.
+
+I would also profile the application using React DevTools before making optimization decisions.
+`,
+
+    codeSnippet: `
+<FixedSizeList
+  height={600}
+  itemCount={10000}
+  itemSize={35}
+>
+  {Row}
+</FixedSizeList>
+`,
+
+    realWorldScenario: `
+An employee-management dashboard displaying 50,000 records became slow. Virtualization reduced render time and memory consumption significantly.
+`
+  },
+
+  {
+    question:
+      "User types in a search box and API gets called 100 times. How would you fix it?",
+
+    answer: `
+This issue occurs because an API request is triggered on every keystroke.
+
+I would implement:
+
+• Debouncing
+• Request cancellation
+• Caching
+• React Query
+
+Debouncing ensures API calls occur only after the user stops typing for a short period.
+
+This reduces server load and improves user experience.
+`,
+
+    codeSnippet: `
+const debouncedSearch =
+  useMemo(
+    () =>
+      debounce(
+        searchUsers,
+        500
+      ),
+    []
+  );
+`,
+
+    realWorldScenario: `
+An enterprise user search page reduced thousands of unnecessary API calls after implementing debouncing.
+`
+  },
+
+  {
+    question:
+      "How would you prevent unnecessary re-renders?",
+
+    answer: `
+I would first identify the cause using React DevTools Profiler.
+
+Common techniques:
+
+• React.memo
+• useMemo
+• useCallback
+• Splitting components
+• Avoiding unnecessary state updates
+
+Optimization should only be applied after finding an actual bottleneck.
+`,
+
+    codeSnippet: `
+export default React.memo(
+  UserCard
+);
+`,
+
+    realWorldScenario: `
+A dashboard widget was re-rendering whenever unrelated state changed. React.memo reduced unnecessary rendering work.
+`
+  },
+
+  {
+    question:
+      "How would you implement role-based access control in React?",
+
+    answer: `
+Role-based access restricts content based on user permissions.
+
+Typically:
+
+1. User logs in.
+2. JWT contains roles.
+3. Roles are stored in Context or Redux.
+4. ProtectedRoute verifies permissions.
+
+Both frontend and backend should validate roles for proper security.
+`,
+
+    codeSnippet: `
+if (
+  user.role !== "ADMIN"
+) {
+  return <Navigate to='/' />;
+}
+`,
+
+    realWorldScenario: `
+Admin pages should not be available to standard users even if the URL is manually entered.
+`
+  },
+
+  {
+    question:
+      "How would you implement JWT refresh token flow?",
+
+    answer: `
+Access tokens are usually short-lived.
+
+When an access token expires:
+
+1. API returns 401.
+2. Client sends refresh token.
+3. Server issues new access token.
+4. Original request is retried.
+
+Axios interceptors are commonly used for implementing this workflow.
+`,
+
+    codeSnippet: `
+axios.interceptors.response.use(
+  response => response,
+  refreshTokenHandler
+);
+`,
+
+    realWorldScenario: `
+Banking and insurance portals often use refresh token mechanisms to maintain session security.
+`
+  },
+
+  {
+    question:
+      "How would you secure frontend routes?",
+
+    answer: `
+Frontend routes should be protected using authentication and authorization checks.
+
+Typical approach:
+
+• JWT validation
+• ProtectedRoute component
+• Role validation
+• Backend verification
+
+Never rely only on frontend route protection because users can manipulate client-side code.
+`,
+
+    codeSnippet: `
+<Route
+  path='/admin'
+  element={
+    <ProtectedRoute>
+      <Admin />
+    </ProtectedRoute>
+  }
+/>
+`,
+
+    realWorldScenario: `
+HR management portals often expose sensitive employee information that must remain protected.
+`
+  },
+
+  {
+    question:
+      "How would you handle API failures globally?",
+
+    answer: `
+Centralized error handling improves maintainability.
+
+Common approaches:
+
+• Axios interceptors
+• Global error boundary
+• Notification system
+• Logging
+
+This prevents duplicate error-handling logic in every component.
+`,
+
+    codeSnippet: `
+axios.interceptors.response.use(
+  response => response,
+  error => {
+    showToast();
+    return Promise.reject(error);
+  }
+);
+`,
+
+    realWorldScenario: `
+Enterprise applications often display consistent notifications whenever APIs fail.
+`
+  },
+
+  {
+    question:
+      "How would you implement dark mode?",
+
+    answer: `
+Dark mode can be implemented using:
+
+• Context API
+• CSS variables
+• Tailwind dark mode
+• Local storage
+
+The theme preference should persist between sessions.
+`,
+
+    codeSnippet: `
+const ThemeContext =
+  createContext();
+
+document.body.classList
+  .toggle("dark");
+`,
+
+    realWorldScenario: `
+Many enterprise dashboards support both light and dark themes for accessibility and user preference.
+`
+  },
+
+  {
+    question:
+      "How would you design reusable forms?",
+
+    answer: `
+Reusable forms are usually built using:
+
+• React Hook Form
+• Formik
+• Custom Hook abstractions
+• Reusable Field components
+
+Validation logic should be centralized and configurable.
+`,
+
+    codeSnippet: `
+<InputField
+  name="email"
+  label="Email"
+/>
+`,
+
+    realWorldScenario: `
+A customer onboarding application can reuse the same form components across registration, profile update, and account settings pages.
+`
+  },
+
+  {
+    question:
+      "How would you handle large file uploads?",
+
+    answer: `
+Large uploads require:
+
+• Chunked uploads
+• Progress tracking
+• Validation
+• Retry mechanisms
+
+Files should be uploaded in pieces instead of a single request for reliability.
+`,
+
+    codeSnippet: `
+const formData =
+  new FormData();
+
+formData.append(
+  "file",
+  file
+);
+`,
+
+    realWorldScenario: `
+Document-management systems commonly upload files larger than 100 MB and require progress indicators.
+`
+  },
+
+  {
+    question:
+      "How would you implement infinite scrolling?",
+
+    answer: `
+Infinite scrolling loads new data as users approach the bottom of the page.
+
+Implementation options:
+
+• Intersection Observer
+• React Query
+• Virtualized Lists
+
+It should include loading indicators and pagination support.
+`,
+
+    codeSnippet: `
+const observer =
+  new IntersectionObserver(
+    callback
+  );
+`,
+
+    realWorldScenario: `
+Social media feeds and product catalogs frequently use infinite scrolling.
+`
+  },
+
+  {
+    question:
+      "How would you optimize bundle size?",
+
+    answer: `
+Bundle optimization techniques include:
+
+• Code Splitting
+• Lazy Loading
+• Tree Shaking
+• Dynamic Imports
+• Removing unused libraries
+
+Bundle analyzers can identify oversized dependencies.
+`,
+
+    codeSnippet: `
+const Reports =
+  lazy(
+    () =>
+      import(
+        "./Reports"
+      )
+  );
+`,
+
+    realWorldScenario: `
+A reporting module used by only a small group of users should not increase the initial application bundle.
+`
+  },
+
+  {
+    question:
+      "How would you cache API responses?",
+
+    answer: `
+Caching reduces network calls and improves responsiveness.
+
+Common approaches:
+
+• React Query
+• Browser Cache
+• Local Storage
+• Session Storage
+
+Caching strategies should account for data freshness.
+`,
+
+    codeSnippet: `
+useQuery({
+  queryKey: ["users"],
+  queryFn: getUsers
+});
+`,
+
+    realWorldScenario: `
+Customer profile data often remains cached to reduce repeated API requests.
+`
+  },
+
+  {
+    question:
+      "How would you detect memory leaks in React?",
+
+    answer: `
+Memory leaks commonly occur when resources are not cleaned up.
+
+Examples:
+
+• Unremoved event listeners
+• Active timers
+• WebSocket connections
+• Uncancelled API requests
+
+Cleanup functions inside useEffect help prevent leaks.
+`,
+
+    codeSnippet: `
+useEffect(() => {
+  const id =
+    setInterval(
+      fn,
+      1000
+    );
+
+  return () =>
+    clearInterval(id);
+}, []);
+`,
+
+    realWorldScenario: `
+Long-running dashboard screens can consume increasing memory if subscriptions are not cleaned up properly.
+`
+  },
+
+  {
+    question:
+      "How would you debug production issues?",
+
+    answer: `
+I usually follow a systematic approach:
+
+1. Check logs.
+2. Review monitoring dashboards.
+3. Inspect network requests.
+4. Reproduce the issue locally.
+5. Use source maps.
+6. Investigate recent deployments.
+
+Tools:
+
+• Browser DevTools
+• Application Logs
+• Sentry
+• Datadog
+• Splunk
+
+A structured debugging process is critical in production environments.
+`,
+
+    codeSnippet: `
+try {
+  await api.get();
+}
+catch(error) {
+  logger.error(error);
+}
+`,
+
+    realWorldScenario: `
+A production issue impacting customer payments was traced through centralized logs and monitoring tools.
+`
+  },
+  {
+    question: "How would you design a large-scale React application?",
+
+    answer: `
+For large-scale React applications, I focus on scalability, maintainability, performance, and team collaboration.
+
+Typical architecture includes:
+
+• Feature-based folder structure
+• Shared component library
+• API service layer
+• State management strategy
+• Route-based code splitting
+• TypeScript
+• Centralized error handling
+• Testing strategy
+
+The goal is to ensure that multiple teams can develop features independently without creating tight coupling between modules.
+`,
+
+    codeSnippet: `
+src/
+ ├── features/
+ ├── pages/
+ ├── shared/
+ ├── services/
+ ├── hooks/
+ ├── types/
+ └── store/
+`,
+
+    realWorldScenario: `
+A banking application containing Accounts, Loans, Transactions and Reports modules uses feature-based architecture to keep development manageable.
+`
+  },
+
+  {
+    question: "How would you architect state management in a large application?",
+
+    answer: `
+Not all state belongs in Redux or Context.
+
+I usually categorize state into:
+
+• Local UI State
+• Shared Client State
+• Server State
+
+Local UI State:
+useState
+
+Shared State:
+Redux / Zustand
+
+Server State:
+React Query
+
+Choosing the correct state location prevents unnecessary complexity and improves performance.
+`,
+
+    codeSnippet: `
+UI State:
+useState()
+
+Global State:
+Redux
+
+Server State:
+React Query
+`,
+
+    realWorldScenario: `
+A customer portal stores authentication globally in Redux while customer lists are managed through React Query.
+`
+  },
+
+  {
+    question: "How would you design a reusable component library?",
+
+    answer: `
+A reusable component library reduces duplication and improves consistency.
+
+Important considerations:
+
+• Accessibility
+• Theming
+• TypeScript support
+• Documentation
+• Storybook
+• Unit testing
+
+Components should remain business-agnostic and configurable through props.
+`,
+
+    codeSnippet: `
+<Button
+  variant="primary"
+  size="medium"
+/>
+`,
+
+    realWorldScenario: `
+Large organizations often maintain a Design System used across multiple applications.
+`
+  },
+
+  {
+    question: "How would you implement Micro Frontends?",
+
+    answer: `
+Micro Frontends split a large frontend into independently deployable modules.
+
+Each team owns a feature area.
+
+Typical architecture:
+
+Shell App
+  ├ Projects
+  ├ Reports
+  └ Billing
+
+Benefits:
+
+• Independent deployment
+• Team autonomy
+• Faster delivery
+
+Challenges include dependency sharing and cross-module communication.
+`,
+
+    codeSnippet: `
+Shell
+ ├ Billing App
+ ├ Reports App
+ └ Accounts App
+`,
+
+    realWorldScenario: `
+Different banking teams can independently deploy Investment, Credit Card and Transaction modules.
+`
+  },
+
+  {
+    question: "How would you design a dashboard handling millions of records?",
+
+    answer: `
+Rendering millions of records directly is impossible.
+
+I would use:
+
+• Pagination
+• Server-side filtering
+• Virtualization
+• Caching
+• React Query
+• Lazy loading
+
+Only the required data should be fetched and rendered.
+`,
+
+    codeSnippet: `
+query?page=1
+&size=50
+&sort=name
+`,
+
+    realWorldScenario: `
+A transaction monitoring system displaying millions of financial records uses pagination and virtualization to remain responsive.
+`
+  },
+
+  {
+    question: "How would you design authentication for a React application?",
+
+    answer: `
+Authentication typically includes:
+
+• Login
+• JWT
+• Refresh Token
+• Route Guards
+• Role-based Access
+
+Authentication state should be centralized and protected against token expiration issues.
+
+The backend remains the final authority for authorization decisions.
+`,
+
+    codeSnippet: `
+Authorization:
+Bearer token
+`,
+
+    realWorldScenario: `
+Enterprise portals often support multiple roles such as Admin, Manager and User with different permissions.
+`
+  },
+
+  {
+    question: "How would you handle API communication across the application?",
+
+    answer: `
+I usually build a dedicated API service layer.
+
+Benefits:
+
+• Centralized configuration
+• Shared interceptors
+• Error handling
+• Authentication
+• Logging
+
+Components never directly contain networking logic.
+`,
+
+    codeSnippet: `
+api/
+ ├ authApi.ts
+ ├ userApi.ts
+ └ reportApi.ts
+`,
+
+    realWorldScenario: `
+Changing API authentication logic in one place updates behavior across the entire application.
+`
+  },
+
+  {
+    question: "How would you design frontend error handling?",
+
+    answer: `
+Error handling should occur at multiple levels:
+
+• Component level
+• API level
+• Global Error Boundary
+• Monitoring tools
+
+Users should receive friendly messages while developers receive technical details.
+`,
+
+    codeSnippet: `
+<ErrorBoundary>
+  <Dashboard />
+</ErrorBoundary>
+`,
+
+    realWorldScenario: `
+An analytics widget fails while the remaining dashboard continues functioning normally.
+`
+  },
+
+  {
+    question: "How would you improve application performance?",
+
+    answer: `
+Performance improvements include:
+
+• Code Splitting
+• Lazy Loading
+• React.memo
+• useMemo
+• useCallback
+• Virtualization
+• Bundle Analysis
+
+Optimization should always be driven by profiling and metrics instead of assumptions.
+`,
+
+    codeSnippet: `
+const Reports = lazy(
+  () => import("./Reports")
+);
+`,
+
+    realWorldScenario: `
+Reducing initial bundle size from 8 MB to 2 MB dramatically improved loading speed.
+`
+  },
+
+  {
+    question: "How would you design a frontend caching strategy?",
+
+    answer: `
+Caching reduces network traffic and improves responsiveness.
+
+Common approaches:
+
+• React Query Cache
+• Browser Cache
+• Local Storage
+• Session Storage
+
+Cache invalidation should be carefully managed to avoid stale data.
+`,
+
+    codeSnippet: `
+useQuery({
+  queryKey: ["users"],
+  queryFn: fetchUsers
+});
+`,
+
+    realWorldScenario: `
+Customer profile information can be cached while frequently-changing transactions are refetched.
+`
+  },
+
+  {
+    question: "How would you design file upload architecture?",
+
+    answer: `
+File uploads should support:
+
+• Validation
+• Progress tracking
+• Retry handling
+• Chunk uploads
+• Virus scanning
+
+Large files should never be uploaded in a single request.
+`,
+
+    codeSnippet: `
+const formData =
+  new FormData();
+
+formData.append(
+  "file",
+  file
+);
+`,
+
+    realWorldScenario: `
+Insurance applications often upload large policy documents requiring chunk-based uploads.
+`
+  },
+
+  {
+    question: "How would you maintain frontend security?",
+
+    answer: `
+Frontend security best practices include:
+
+• Input validation
+• JWT security
+• HTTPS
+• Route protection
+• Secure Storage
+• Content Security Policy
+
+Frontend should not trust any client-side data and all critical validation should also exist on the backend.
+`,
+
+    codeSnippet: `
+if (
+  !token
+) {
+  navigate("/login");
+}
+`,
+
+    realWorldScenario: `
+Financial applications require multiple security layers to protect sensitive customer information.
+`
+  },
+
+  {
+    question: "How would you monitor a React application in production?",
+
+    answer: `
+Production monitoring usually includes:
+
+• Error Tracking
+• Performance Monitoring
+• Logging
+• User Analytics
+
+Popular tools:
+
+• Sentry
+• Datadog
+• New Relic
+• Splunk
+
+Monitoring helps identify issues before customers report them.
+`,
+
+    codeSnippet: `
+Sentry.captureException(
+  error
+);
+`,
+
+    realWorldScenario: `
+Production monitoring detected increased API failures after deployment and enabled rapid rollback.
+`
+  },
+
+  {
+    question: "How would you design a highly scalable frontend architecture?",
+
+    answer: `
+Scalable frontend architecture requires:
+
+• Module isolation
+• Shared design system
+• CI/CD pipelines
+• Feature ownership
+• Proper state management
+• Testing automation
+
+Architecture decisions should support growth in users, developers, and features.
+`,
+
+    codeSnippet: `
+Apps
+ ├ Customers
+ ├ Reports
+ ├ Payments
+ └ Shared UI
+`,
+
+    realWorldScenario: `
+A multinational organization supports dozens of frontend teams using a shared architecture and component platform.
+`
+  },
+
+  {
+    question: "How would you explain frontend system design in an interview?",
+
+    answer: `
+Follow this structure:
+
+1. Clarify requirements
+2. Identify users
+3. Define architecture
+4. Discuss state management
+5. Explain API design
+6. Cover security
+7. Cover scalability
+8. Cover performance
+9. Cover monitoring
+10. Mention trade-offs
+
+Interviewers are usually more interested in your reasoning than a single perfect solution.
+`,
+
+    codeSnippet: `
+Requirements
+   ↓
+Architecture
+   ↓
+Implementation
+   ↓
+Optimization
+`,
+
+    realWorldScenario: `
+This structure works for dashboard design, e-commerce systems, CRM platforms, and enterprise portals.
+`
+  },
+  {
+    question: "What are React 19 Actions?",
+
+    answer: `
+Actions are a React 19 feature that simplify handling asynchronous operations such as form submissions and data mutations.
+
+Traditionally developers had to manually manage loading state, success state, and error state. Actions provide a more structured approach to managing async workflows.
+
+Actions integrate well with forms and server-side operations, reducing boilerplate code.
+
+They improve developer productivity by making async state transitions easier to manage and reason about.
+`,
+
+    codeSnippet: `
+async function saveUser(
+  formData
+) {
+  "use server";
+
+  await createUser(
+    formData
+  );
+}
+`,
+
+    realWorldScenario: `
+In a user registration screen, Actions can handle form submission, validation, loading state, and server communication with much less code.
+`
+  },
+
+  {
+    question: "What is the use() API?",
+
+    answer: `
+The use() API allows React components to directly consume promises and context values.
+
+Instead of manually handling loading states using useEffect and useState, React can suspend rendering until the promise resolves.
+
+The use() API works particularly well with Server Components and Suspense.
+
+This simplifies data fetching logic and reduces component complexity.
+`,
+
+    codeSnippet: `
+const users = use(
+  fetchUsers()
+);
+`,
+
+    realWorldScenario: `
+A reporting page can directly read data from an asynchronous source without maintaining separate loading and data states.
+`
+  },
+
+  {
+    question: "What is useOptimistic()?",
+
+    answer: `
+useOptimistic helps create optimistic user interfaces.
+
+The UI updates immediately before the server confirms success.
+
+If the operation succeeds, the optimistic change remains.
+If it fails, React can roll back the change.
+
+This improves perceived performance and user experience.
+`,
+
+    codeSnippet: `
+const [
+  optimisticTodos,
+  addTodo
+] = useOptimistic(
+  todos
+);
+`,
+
+    realWorldScenario: `
+Social media likes, comments, and reactions often update instantly before receiving server confirmation.
+`
+  },
+
+  {
+    question: "What is Optimistic UI?",
+
+    answer: `
+Optimistic UI is a design pattern where the interface assumes a successful server response and updates immediately.
+
+Instead of waiting for an API response, the UI changes instantly.
+
+Benefits:
+
+• Faster perceived performance
+• Better user experience
+• Reduced waiting
+
+If the request fails, the application can roll back the changes.
+`,
+
+    codeSnippet: `
+setLikes(
+  likes + 1
+);
+
+// then call API
+`,
+    realWorldScenario: `
+E-commerce carts, likes, comments, and favorites commonly use optimistic updates.
+`
+  },
+
+  {
+    question: "What is useActionState()?",
+
+    answer: `
+useActionState simplifies managing form actions and asynchronous state transitions.
+
+It automatically tracks action state and updates UI accordingly.
+
+Developers no longer need to manually create multiple loading and error state variables.
+
+It integrates naturally with React 19 Actions and form handling.
+`,
+
+    codeSnippet: `
+const [
+  state,
+  submitAction
+] = useActionState(
+  saveUser,
+  initialState
+);
+`,
+
+    realWorldScenario: `
+A profile update form tracks submission progress and response status without multiple useState declarations.
+`
+  },
+
+  {
+    question: "What is useFormStatus()?",
+
+    answer: `
+useFormStatus allows components to determine whether a form submission is currently pending.
+
+It is mainly used to display loading indicators, disable buttons, and provide visual feedback during submissions.
+
+This reduces the amount of manual state management required for forms.
+`,
+
+    codeSnippet: `
+const {
+  pending
+} = useFormStatus();
+`,
+    realWorldScenario: `
+A registration form disables the Submit button while processing a request.
+`
+  },
+
+  {
+    question: "How does React 19 improve forms?",
+
+    answer: `
+React 19 introduces significant improvements for form handling.
+
+Features include:
+
+• Actions
+• useActionState
+• useFormStatus
+• Server Actions integration
+
+These features reduce boilerplate and simplify handling validations, loading states, and submissions.
+
+React forms become more declarative and easier to maintain.
+`,
+
+    codeSnippet: `
+<form action={createUser}>
+  <button>
+    Save
+  </button>
+</form>
+`,
+    realWorldScenario: `
+Enterprise onboarding forms become easier to implement and maintain using built-in React form capabilities.
+`
+  },
+
+  {
+    question: "What are React Server Actions?",
+
+    answer: `
+Server Actions allow client components to invoke server-side logic directly.
+
+Instead of creating dedicated REST endpoints for every operation, developers can execute server-side functions from forms or UI interactions.
+
+Benefits:
+
+• Less boilerplate
+• Simplified architecture
+• Tighter integration between UI and backend logic
+`,
+
+    codeSnippet: `
+"use server";
+
+export async function
+createOrder() {
+  // save order
+}
+`,
+    realWorldScenario: `
+An order creation form directly calls server-side business logic without creating a separate API controller.
+`
+  },
+
+  {
+    question: "What is the React Compiler?",
+
+    answer: `
+The React Compiler is designed to automatically optimize React applications.
+
+Its goal is to reduce the need for manual optimization techniques such as:
+
+• useMemo
+• useCallback
+• React.memo
+
+The compiler analyzes component behavior and applies optimizations automatically where possible.
+
+This allows developers to focus more on business logic rather than performance tuning.
+`,
+
+    codeSnippet: `
+function UserCard() {
+  return <div>User</div>;
+}
+`,
+    realWorldScenario: `
+Large applications may achieve performance improvements without requiring developers to manually apply memoization everywhere.
+`
+  },
+
+  {
+    question: "How does React 19 improve performance?",
+
+    answer: `
+React 19 introduces several improvements:
+
+• Better asynchronous rendering
+• Improved form handling
+• Optimistic updates
+• Enhanced Server Components support
+• React Compiler optimizations
+
+These features improve both developer productivity and user experience.
+
+Modern React applications become faster and easier to maintain.
+`,
+
+    codeSnippet: `
+const [
+  optimisticData,
+  updateData
+] = useOptimistic(
+  data
+);
+`,
+    realWorldScenario: `
+Large enterprise applications benefit from reduced code complexity and better responsiveness.
+`
+  },
+
+  {
+    question: "What are the major differences between React 18 and React 19?",
+
+    answer: `
+React 18 introduced:
+
+• Concurrent Rendering
+• Suspense improvements
+• useTransition
+
+React 19 expands on those features and adds:
+
+• Actions
+• useOptimistic
+• useActionState
+• useFormStatus
+• Enhanced Server Components support
+• React Compiler initiative
+
+React 19 focuses heavily on simplifying async operations and reducing boilerplate.
+`,
+
+    codeSnippet: `
+React 18
+   ↓
+React 19
+   ↓
+Actions & Optimistic UI
+`,
+    realWorldScenario: `
+Teams migrating from React 18 can reduce custom form and loading-state management code using React 19 features.
+`
+  },
+
+  {
+    question: "How should you prepare for React 19 interview questions?",
+
+    answer: `
+Interviewers typically focus on:
+
+• Actions
+• use()
+• useOptimistic()
+• useActionState()
+• useFormStatus()
+• Server Actions
+• React Compiler
+
+When answering, explain not only what the feature does but also why it was introduced and which problems it solves.
+
+Real-world examples are often more important than memorizing API signatures.
+`,
+
+    codeSnippet: `
+Actions
+use()
+useOptimistic()
+useFormStatus()
+`,
+    realWorldScenario: `
+Senior frontend interviews increasingly expect awareness of modern React features and future React architecture trends.
+`
   }
 ];
