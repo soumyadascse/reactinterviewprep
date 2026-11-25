@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
@@ -33,7 +33,9 @@ export default function MainLayout() {
           p-3
           md:p-6"
         >
-          <Outlet />
+          <Suspense fallback={<div className="p-6" role="status">Loading page...</div>}>
+            <Outlet />
+          </Suspense>
         </main>
 
       </div>

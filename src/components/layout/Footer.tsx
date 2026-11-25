@@ -10,7 +10,7 @@ export default function Footer() {
       mt-auto
       "
     >
-      React Interview Prep © 2026
+      React Interview Prep Developed By Soumya Das © 2026
     </footer>
   );
 }

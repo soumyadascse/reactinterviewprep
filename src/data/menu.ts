@@ -49,6 +49,12 @@ export const menu = [
 //       { name: "Zustand", path: "/topic/zustand" },
 //     ],
 //   },
+  {
+    title: "Practice",
+    children: [
+      { name: "Practice Questions", path: "/practice-questions" },
+    ],
+  },
 
   {
     title: "Practice Playground",

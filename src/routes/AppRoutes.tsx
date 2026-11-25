@@ -1,45 +1,31 @@
-import {
-  Routes,
-  Route
-} from "react-router-dom";
+import { lazy } from "react";
+import { Routes, Route } from "react-router-dom";
 
 import MainLayout from "../components/layout/MainLayout";
 
 import Home from "../pages/Home";
-import TopicPage from "../pages/TopicPage";
-import Playground from "../pages/Playground";
-import ReactInterviewQA from "../pages/ReactInterviewQA";
+
+const TopicPage = lazy(() => import("../pages/TopicPage"));
+const Playground = lazy(() => import("../pages/Playground"));
+const ReactInterviewQA = lazy(() => import("../pages/ReactInterviewQA"));
+const PracticeQuestions = lazy(() => import("../pages/PracticeQuestions"));
 
 export default function AppRoutes() {
   return (
     <Routes>
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={<Home />} />
 
-      <Route
-        path="/"
-        element={<MainLayout />}
-      >
+        <Route path="/topic/:topic" element={<TopicPage />} />
 
-        <Route
-          index
-          element={<Home />}
-        />
+        <Route path="/playground" element={<Playground />} />
 
-        <Route
-          path="/topic/:topic"
-          element={<TopicPage />}
-        />
+        <Route path="interview-qa" element={<ReactInterviewQA />} />
 
-        <Route
-          path="/playground"
-          element={<Playground />}
-        />
+        <Route path="*" element={<div>Page Not Found</div>} />
 
-        <Route
-            path="interview-qa"
-            element={<ReactInterviewQA />}
-            />
-        </Route>
-
+        <Route path="practice-questions" element={<PracticeQuestions />} />
+      </Route>
     </Routes>
   );
 }
