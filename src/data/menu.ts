@@ -53,14 +53,15 @@ export const menu = [
     title: "Practice",
     children: [
       { name: "Practice Questions", path: "/practice-questions" },
+      { name: "Practice Questions Hooks", path: "/practice-questions-Hooks" },
     ],
   },
 
   {
     title: "Practice Playground",
     children: [
-        { name: "Try Out", path: "/playground" }
-    //   { name: "Counter", path: "/playground/counter" },
+        { name: "Try Out React", path: "/playground" },
+      { name: "Try Out Java", path: "/playground-java" },
     //   { name: "Todo App", path: "/playground/todo" },
     //   { name: "CRUD", path: "/playground/crud" },
     //   { name: "Shopping Cart", path: "/playground/cart" },
