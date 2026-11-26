@@ -1,6 +1,14 @@
 import { useRef, useState } from "react";
 import Editor, { type OnMount } from "@monaco-editor/react";
-import { Play, Copy, Maximize2, Loader2, ClipboardPaste } from "lucide-react";
+import {
+  Play,
+  Copy,
+  Maximize2,
+  Loader2,
+  ClipboardPaste,
+  Trash2,
+  RotateCcw,
+} from "lucide-react";
 
 const DEFAULT_CODE = `public class Main {
     public static void main(String[] args) {
@@ -29,6 +37,21 @@ export default function PlaygroundJava() {
         behavior: "smooth",
         block: "start",
       });
+    }, 100);
+  };
+
+  const clearCode = () => {
+    setCode("");
+    setOutput("");
+    editorRef.current?.focus();
+  };
+
+  const resetCode = () => {
+    setCode(DEFAULT_CODE);
+    setOutput("");
+
+    setTimeout(() => {
+      editorRef.current?.focus();
     }, 100);
   };
 
@@ -100,7 +123,7 @@ export default function PlaygroundJava() {
             <p className="text-slate-400 text-sm">Powered by Monaco + Judge0</p>
           </div>
 
-          <div className="grid grid-cols-2 md:flex gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:flex gap-2">
             <button
               onClick={copyCode}
               className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white"
@@ -115,6 +138,22 @@ export default function PlaygroundJava() {
             >
               <ClipboardPaste size={16} />
               Paste
+            </button>
+
+            <button
+              onClick={clearCode}
+              className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white"
+            >
+              <Trash2 size={16} />
+              Clear
+            </button>
+
+            <button
+              onClick={resetCode}
+              className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-amber-600 hover:bg-amber-700 text-white"
+            >
+              <RotateCcw size={16} />
+              Reset
             </button>
 
             <button
