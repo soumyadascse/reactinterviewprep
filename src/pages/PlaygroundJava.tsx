@@ -8,14 +8,13 @@ const DEFAULT_CODE = `public class Main {
     }
 }`;
 
-
 export default function PlaygroundJava() {
-const editorRef = useRef<any>(null);
+  const editorRef = useRef<any>(null);
 
-const handleEditorDidMount: OnMount = (editor) => {
-  editorRef.current = editor;
-  editor.focus();
-};
+  const handleEditorDidMount: OnMount = (editor) => {
+    editorRef.current = editor;
+    editor.focus();
+  };
   const [code, setCode] = useState(DEFAULT_CODE);
 
   const [output, setOutput] = useState("");
@@ -80,50 +79,52 @@ const handleEditorDidMount: OnMount = (editor) => {
     >
       {/* Toolbar */}
 
-      <div className="flex flex-wrap gap-2 items-center justify-between px-4 py-3 bg-slate-900 border-b border-slate-700">
-        <div>
-          <h2 className="text-lg font-bold text-white">Java Playground</h2>
+      <div className="px-4 py-3 bg-slate-900 border-b border-slate-700">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+          <div>
+            <h2 className="text-lg font-bold text-white">Java Playground</h2>
 
-          <p className="text-slate-400 text-sm">Powered by Monaco + Judge0</p>
-        </div>
+            <p className="text-slate-400 text-sm">Powered by Monaco + Judge0</p>
+          </div>
 
-        <div className="flex gap-2">
-          <button
-            onClick={copyCode}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white"
-          >
-            <Copy size={16} />
-            Copy
-          </button>
+          <div className="grid grid-cols-2 md:flex gap-2">
+            <button
+              onClick={copyCode}
+              className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white"
+            >
+              <Copy size={16} />
+              Copy
+            </button>
 
-          <button
-            onClick={pasteCode}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white"
-          >
-            <ClipboardPaste size={16} />
-            Paste
-          </button>
+            <button
+              onClick={pasteCode}
+              className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white"
+            >
+              <ClipboardPaste size={16} />
+              Paste
+            </button>
 
-          <button
-            onClick={fullScreen}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white"
-          >
-            <Maximize2 size={16} />
-            Fullscreen
-          </button>
+            <button
+              onClick={fullScreen}
+              className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white"
+            >
+              <Maximize2 size={16} />
+              Full
+            </button>
 
-          <button
-            disabled={loading}
-            onClick={runCode}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-medium"
-          >
-            {loading ? (
-              <Loader2 size={16} className="animate-spin" />
-            ) : (
-              <Play size={16} />
-            )}
-            Run
-          </button>
+            <button
+              disabled={loading}
+              onClick={runCode}
+              className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-medium"
+            >
+              {loading ? (
+                <Loader2 size={16} className="animate-spin" />
+              ) : (
+                <Play size={16} />
+              )}
+              Run
+            </button>
+          </div>
         </div>
       </div>
 
