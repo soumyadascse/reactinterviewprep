@@ -21,10 +21,22 @@ export default function PlaygroundJava() {
 
   const [loading, setLoading] = useState(false);
 
+  const outputRef = useRef<HTMLDivElement>(null);
+
+  const scrollToOutput = () => {
+    setTimeout(() => {
+      outputRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 100);
+  };
+
   const runCode = async () => {
     try {
       setLoading(true);
       setOutput("Compiling...");
+      scrollToOutput();
 
       const response = await fetch(
         "https://ce.judge0.com/submissions?wait=true",
@@ -47,6 +59,7 @@ export default function PlaygroundJava() {
       );
     } catch (error) {
       setOutput("Failed to execute code.");
+      scrollToOutput();
     } finally {
       setLoading(false);
     }
@@ -131,7 +144,7 @@ export default function PlaygroundJava() {
       {/* Editor */}
 
       <Editor
-        height="500px"
+        height="60vh"
         defaultLanguage="java"
         value={code}
         onMount={handleEditorDidMount}
@@ -153,12 +166,15 @@ export default function PlaygroundJava() {
           fontSize: 16,
           wordWrap: "on",
           scrollBeyondLastLine: false,
+          scrollbar: {
+            horizontal: "hidden",
+          },
         }}
       />
 
       {/* Output */}
 
-      <div className="border-t border-slate-700">
+      <div ref={outputRef} className="border-t border-slate-700">
         <div className="bg-slate-900 px-4 py-2 text-white font-medium">
           Console Output
         </div>
